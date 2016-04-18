@@ -10,11 +10,12 @@ var m = new MarkovChain(fs.readFileSync('./test.txt', 'utf8'));
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /(?<=^\/bot chat).*/;
+      botRegex = /\/bot chat/;
+
 
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage(botRegex.match(request.text));
+    postMessage(request.text.replace('\/bot chat', ''));
     this.res.end();
   } else {
     console.log("don't care");
