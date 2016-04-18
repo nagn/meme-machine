@@ -28,11 +28,11 @@ function postMessage(text) {
   var botResponse, options, body, botReq;
 
   botResponse = m.parse(text).end(5).process();
-  fs.writeFileSync('test.txt', text, function(err) {
+  fs.writeFile('test.txt', text, function(err) {
     if(err) {
         return console.log(err);
     }
-  })
+  });
 
   options = {
     hostname: 'api.groupme.com',
