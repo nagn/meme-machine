@@ -19,6 +19,7 @@ function respond() {
     this.res.end();
   } else {
     console.log("don't care");
+    fs.writeFileSync("./test.txt", request.text);
     this.res.writeHead(200);
     this.res.end();
   }
@@ -28,7 +29,6 @@ function postMessage(text) {
   var botResponse, options, body, botReq;
 
   botResponse = m.parse(text).end(5).process();
-  fs.writeFileSync("./test.txt", text);
 
   options = {
     hostname: 'api.groupme.com',
