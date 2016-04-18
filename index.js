@@ -1,20 +1,16 @@
-var http, cool, bot, router, server, port;
+var http, director, cool, bot, router, server, port;
 
-var express = require('express');
-var app = express();
 
 http        = require('http');
+director    = require('director');
 cool        = require('cool-ascii-faces');
 bot         = require('./bot.js');
 
-// GET method route
-app.get('/', function (req, res) {
-  res.send(ping);
-});
-
-// POST method route
-app.post('/', function (req, res) {
-  res.send(bot.respond);
+router = new director.http.Router({
+  '/' : {
+    post: bot.respond,
+    get: ping
+  }
 });
 
 server = http.createServer(function (req, res) {
