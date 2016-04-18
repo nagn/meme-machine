@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nagn/meme-machine/issues"
   },
-  "homepage": "https://github.com/nagn/meme-machine#readme"
+  "homepage": "https://github.com/nagn/meme-machine#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
