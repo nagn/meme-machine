@@ -15,7 +15,7 @@ function respond() {
 
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage(request.text.replace('\/bot chat', ''));
+    postMessage(request.text.replace('\/bot chat ', ''));
     this.res.end();
   } else {
     console.log("don't care");
@@ -27,7 +27,8 @@ function respond() {
 function postMessage(text) {
   var botResponse, options, body, botReq;
 
-  botResponse = text[1];
+  botResponse = m.parse(text).end(5).process();
+
 
   options = {
     hostname: 'api.groupme.com',
