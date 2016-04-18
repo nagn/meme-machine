@@ -21,6 +21,7 @@
     "director": "^1.2.8",
     "express": "^4.13.4",
     "foreman": "^1.4.1",
-    "heroku": "^0.2.0"
+    "heroku": "^0.2.0",
+    "markovchain": "^1.0.2"
   }
 }

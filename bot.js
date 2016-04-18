@@ -3,13 +3,18 @@ var cool = require('cool-ascii-faces');
 
 var botID = process.env.BOT_ID;
 
+
+var MarkovChain = require('markovchain');
+fs = require('fs')
+var m = new MarkovChain(fs.readFileSync('./test.txt', 'utf8'));
+
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/cool guy$/;
+      botRegex = /(?<=^\/bot chat).*/;
 
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage();
+    postMessage(botRegex.match(request.text));
     this.res.end();
   } else {
     console.log("don't care");
@@ -18,10 +23,10 @@ function respond() {
   }
 }
 
-function postMessage() {
+function postMessage(text) {
   var botResponse, options, body, botReq;
 
-  botResponse = cool();
+  botResponse = text[1];
 
   options = {
     hostname: 'api.groupme.com',
