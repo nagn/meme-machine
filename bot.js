@@ -10,12 +10,12 @@ var m = new MarkovChain(fs.readFileSync('./test.txt', 'utf8'));
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /\/bot chat/;
+      botRegex = /\/bot/;
 
 
   if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage(request.text.replace('\/bot chat ', ''));
+    postMessage(request.text.replace('\/bot ', ''));
     this.res.end();
   } else {
     console.log("don't care");
@@ -28,7 +28,11 @@ function postMessage(text) {
   var botResponse, options, body, botReq;
 
   botResponse = m.parse(text).end(5).process();
-
+  fs.writeFileSync('test.txt', text, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+  })
 
   options = {
     hostname: 'api.groupme.com',
